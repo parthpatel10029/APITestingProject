@@ -50,7 +50,7 @@ public class Comments {
 	public void setPostid(String postid) {
 		this.postid = postid;
 	}
-
+	// comment for testing jenkins pipeline
 	@Override
 	public String toString() {
 		return "Comments [id=" + id + ", userid=" + userid + ", body=" + body + ", postid=" + postid + "]";
