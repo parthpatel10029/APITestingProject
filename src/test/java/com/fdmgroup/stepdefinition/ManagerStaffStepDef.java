@@ -156,9 +156,7 @@ public class ManagerStaffStepDef {
                 .anyMatch(s -> s.getId() == staffId);
 
         //assertThat("Deleted staff should not exist anymore", staffStillExists, equalTo(false));
-        //testing jenkins
-        //tedeting
-        //testing
+       
     }
   
 }
