@@ -143,7 +143,7 @@ public class CommentsStepDef {
         
     }
 
-    
+    //adding comment just for testing jenkins
     @Then("User receives a response status code {int}")
     public void user_receives_a_response_status_code(Integer expectedCode) {
         response.then().assertThat().statusCode(expectedCode);

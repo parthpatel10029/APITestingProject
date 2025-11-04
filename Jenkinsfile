@@ -1,44 +1,67 @@
 pipeline {
-    agent any
-
-    tools {
-        maven 'Maven_3.9.11'   // Must match the name configured in Jenkins
-        jdk 'JDK17'            // Must match your JDK name in Jenkins
+  agent any
+ 
+  tools {
+    jdk   'jdk-21'
+    maven 'maven-3.9'
+  }
+ 
+  stages {
+ 
+    stage('Checkout') {
+      steps {
+        echo 'Checking out source code from GitHub...'
+        checkout scm
+      }
     }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                // Pull code from your GitHub repo
-                git branch: 'main', url: 'https://github.com/parthpatel10029/APITestingProject.git'
-            }
-        }
-
-        stage('Build & Test') {
-            steps {
-                // Clean and run all Maven tests
-                bat 'mvn clean test'
-            }
-        }
-
-        stage('Archive Reports') {
-            steps {
-                // Save surefire test reports in Jenkins build logs
-                junit '**/target/surefire-reports/*.xml'
-            }
-        }
+ 
+    stage('Build & Test API') {
+      steps {
+        echo 'Running Cucumber API tests...'
+        bat 'mvn -B clean test -Dtest=CucumberRunnerTest'
+      }
     }
-
-    post {
-        always {
-            echo 'Cleaning workspace after build...'
-            deleteDir()
+ 
+    stage('Publish Reports') {
+      steps {
+        echo 'Publishing Cucumber API reports...'
+ 
+        junit testResults: 'Report/*.junit', allowEmptyResults: true
+ 
+        script {
+          def candidates = [
+            'Report/cucumber.html',
+            'Report/index.html',
+            'Report/cucumber/index.html',
+            'Report/cucumber/cucumber.html'
+          ]
+ 
+          def found = candidates.find { fileExists(it) }
+          if (found) {
+            echo "Publishing Cucumber report: ${found}"
+            def dir  = found.substring(0, found.lastIndexOf('/'))
+            def file = found.substring(found.lastIndexOf('/') + 1)
+            publishHTML([
+              reportDir: dir,
+              reportFiles: file,
+              reportName: 'Cucumber API Report',
+              keepAll: true,
+              alwaysLinkToLastBuild: true,
+              allowMissing: false
+            ])
+          } else {
+            echo "No Cucumber HTML report found in: ${candidates}"
+          }
         }
-        success {
-            echo '✅ Build and API tests succeeded!'
-        }
-        failure {
-            echo '❌ Build or tests failed!'
-        }
+ 
+        archiveArtifacts artifacts: 'Report/**, target/**', fingerprint: true
+      }
     }
+  }
+ 
+  post {
+    always {
+      echo 'Pipeline finished.'
+    }
+  }
 }
