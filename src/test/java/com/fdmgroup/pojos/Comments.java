@@ -46,11 +46,11 @@ public class Comments {
 	public String getPostid() {
 		return postid;
 	}
-
+	// hellololzdvfdgfiu
 	public void setPostid(String postid) {
 		this.postid = postid;
 	}
-	// comment for testing jenkins pipeline
+	// comment for testing jenkins pipeline test 2
 	@Override
 	public String toString() {
 		return "Comments [id=" + id + ", userid=" + userid + ", body=" + body + ", postid=" + postid + "]";
