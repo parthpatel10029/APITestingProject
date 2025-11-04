@@ -1,41 +1,41 @@
 pipeline {
   agent any
- 
+
   tools {
-    jdk   'jdk-17'
-    maven 'maven-3.9'
+    jdk   'JDK17'
+    maven 'Maven_3.9.11'
   }
- 
+
   stages {
- 
+
     stage('Checkout') {
       steps {
         echo 'Checking out source code from GitHub...'
         checkout scm
       }
     }
- 
+
     stage('Build & Test API') {
       steps {
-        echo 'Running Cucumber API tests...'
-        bat 'mvn -B clean test -Dtest=CucumberRunnerTest'
+        echo 'Running API Tests via Maven...'
+        bat 'mvn clean test'
       }
     }
- 
+
     stage('Publish Reports') {
       steps {
-        echo 'Publishing Cucumber API reports...'
- 
-        junit testResults: 'Report/*.junit', allowEmptyResults: true
- 
+        echo 'Publishing API Test Reports...'
+
+        // Publish JUnit/TestNG results
+        junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
+
+        // Publish Cucumber HTML if available
         script {
           def candidates = [
-            'Report/cucumber.html',
-            'Report/index.html',
-            'Report/cucumber/index.html',
-            'Report/cucumber/cucumber.html'
+            'target/cucumber-reports/cucumber.html',
+            'target/cucumber-reports/index.html',
+            'target/cucumber/cucumber.html'
           ]
- 
           def found = candidates.find { fileExists(it) }
           if (found) {
             echo "Publishing Cucumber report: ${found}"
@@ -53,12 +53,12 @@ pipeline {
             echo "No Cucumber HTML report found in: ${candidates}"
           }
         }
- 
-        archiveArtifacts artifacts: 'Report/**, target/**', fingerprint: true
+
+        archiveArtifacts artifacts: 'target/**', fingerprint: true
       }
     }
   }
- 
+
   post {
     always {
       echo 'Pipeline finished.'

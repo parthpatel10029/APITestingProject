@@ -3,113 +3,24 @@
     {
       "id": "1",
       "name": "cucumber salad",
-      "price": 12.5
+      "price": 2.5
     },
     {
       "id": "2",
       "name": "french fries",
-      "price": 15.99
+      "price": 5.5
     },
     {
       "id": "3",
       "name": "soft drink",
-      "price": 20
+      "price": 5.5
     },
     {
       "id": "4",
       "name": "burgers",
       "price": 9.55
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
-    },
-    {
-      "id": 5,
-      "price": "7.50",
-      "name": "pizza"
-    },
-    {
-      "id": 6,
-      "price": "8.50",
-      "name": "donut"
     }
+	
   ],
   "comments": [
     {
@@ -156,7 +67,7 @@
         },
         {
           "id": 2,
-          "name": "Hello",
+          "name": "Kristina Wagner",
           "salary": 300
         }
       ]
